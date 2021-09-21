@@ -6,8 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.asty.springdata.orm.Cargo;
-import br.com.asty.springdata.repository.CargoRepository;
 import br.com.asty.springdata.service.CrudCargoService;
 
 @SpringBootApplication

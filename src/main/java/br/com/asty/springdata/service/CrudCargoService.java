@@ -11,13 +11,38 @@ import br.com.asty.springdata.repository.CargoRepository;
 public class CrudCargoService {
     
     private final CargoRepository cargoRepository;
+    private boolean system = true;
 
     public CrudCargoService(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
     }
 
     public void inicial(Scanner scanner){
-        salvar(scanner);
+        
+        while(system){
+            System.out.println("Qual ação de cargo deseja executar?");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Salvar");
+            System.out.println("2 - Atualizar");
+
+            int action = scanner.nextInt();
+
+            switch(action){
+
+                case 1:
+                    salvar(scanner);
+                    break;
+
+                case 2:
+                    atualizar(scanner);
+                    break;
+
+                default:
+                    system = false;
+                    break;
+            }
+        }
+       
     }
 
     private void salvar(Scanner scanner){
@@ -28,5 +53,18 @@ public class CrudCargoService {
         cargoRepository.save(cargo);
         System.out.println("Salvo");
     }
+
+    private void atualizar(Scanner scanner){
+        System.out.println("Id");
+        int id = scanner.nextInt();
+        System.out.println("Descrição do cargo");
+        String descricao = scanner.next();
+        Cargo cargo = new Cargo();
+        cargo.setId(id);
+        cargo.setDescricao(descricao);
+        cargoRepository.save(cargo);
+        System.out.println("Atualizado");
+    }
+    
 
 }
