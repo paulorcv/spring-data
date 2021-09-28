@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.asty.springdata.orm.Funcionario;
+import br.com.asty.springdata.orm.FuncionarioProjecao;
 import br.com.asty.springdata.repository.FuncionarioRepository;
 
 @Service
@@ -32,6 +33,7 @@ public class RelatoriosService {
             System.out.println("1 - Buscar funcionário por nome");
             System.out.println("2 - Buscar funcionário por nome, data de contratação e salário maior");
             System.out.println("3 - Buscar funcionário por data de contratação");
+            System.out.println("4 - Buscar salários de funcionários");
 
             int action = scanner.nextInt();
 
@@ -46,6 +48,10 @@ public class RelatoriosService {
 
                 case 3:
                     buscaFuncionarioDataContratacao(scanner);
+
+                case 4:
+                    buscaFuncionarioSalario();
+                    break;
 
                 default:
                     system = false;
@@ -99,4 +105,10 @@ public class RelatoriosService {
         }
     }
 
+    private void buscaFuncionarioSalario() {
+        List<FuncionarioProjecao> listaFuncionarios = funcionarioRepository.findFuncionarioSalario();
+        for (FuncionarioProjecao f : listaFuncionarios) {
+            System.out.println(f); 
+        }   
+    }
 }
