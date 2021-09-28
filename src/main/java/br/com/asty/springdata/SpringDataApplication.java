@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.asty.springdata.service.CrudCargoService;
 import br.com.asty.springdata.service.CrudUnidadeTrabalhoService;
+import br.com.asty.springdata.service.RelatorioFuncionarioDinamico;
 import br.com.asty.springdata.service.RelatoriosService;
 
 @SpringBootApplication
@@ -17,15 +18,18 @@ public class SpringDataApplication implements CommandLineRunner {
 	private final CrudFuncionarioService funcionarioService;
 	private final CrudUnidadeTrabalhoService unidadeTrabalhoService;
 	private final RelatoriosService relatoriosService;
+	private final RelatorioFuncionarioDinamico relatorioFuncionarioDinamicoService;
 
 	private boolean system = true;
 
 	public SpringDataApplication(CrudCargoService cargoService, CrudUnidadeTrabalhoService unidadeTrabalhoService,
-			CrudFuncionarioService funcionarioService, RelatoriosService relatoriosService) {
+			CrudFuncionarioService funcionarioService, RelatoriosService relatoriosService,
+			RelatorioFuncionarioDinamico relatorioFuncionarioDinamico) {
 		this.cargoService = cargoService;
 		this.unidadeTrabalhoService = unidadeTrabalhoService;
 		this.funcionarioService = funcionarioService;
-		this.relatoriosService = relatoriosService;		
+		this.relatoriosService = relatoriosService;
+		this.relatorioFuncionarioDinamicoService = relatorioFuncionarioDinamico;
 	}
 
 	public static void main(String[] args) {
@@ -43,27 +47,32 @@ public class SpringDataApplication implements CommandLineRunner {
 			System.out.println("2 - Cargo");
 			System.out.println("3 - Unidade");
 			System.out.println("4 - Relatórios");
+			System.out.println("5 - Relatório Funcionário Dinâmico");
 
 			Integer function = scanner.nextInt();
 
 			switch (function) {
-			case 1:
-				funcionarioService.inicial(scanner);
-				break;
-			case 2:
-				cargoService.inicial(scanner);
-				break;
-			case 3:
-				unidadeTrabalhoService.inicial(scanner);
-				break;
-			case 4:
-				relatoriosService.inicial(scanner);
-				break;
+				case 1:
+					funcionarioService.inicial(scanner);
+					break;
+				case 2:
+					cargoService.inicial(scanner);
+					break;
+				case 3:
+					unidadeTrabalhoService.inicial(scanner);
+					break;
+				case 4:
+					relatoriosService.inicial(scanner);
+					break;
 
-			default:
-				System.out.println("Finalizando");
-				system = false;
-				break;
+				case 5:
+					relatorioFuncionarioDinamicoService.inicial(scanner);
+					break;
+
+				default:
+					System.out.println("Finalizando");
+					system = false;
+					break;
 			}
 		}
 
